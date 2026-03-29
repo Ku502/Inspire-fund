@@ -148,11 +148,3 @@ Open `frontend/index.html` in a browser, or use VS Code Live Server (recommended
 
 ---
 
-## Resume Talking Points
-
-- **End-to-end full stack**: designed and built every layer from DB schema to UI
-- **JWT authentication**: stateless auth with role-based access (DONOR / ADMIN)
-- **Payment gateway integration**: Razorpay with HMAC-SHA256 webhook verification
-- **RESTful API design**: proper HTTP methods, status codes, and separation of concerns
-- **Database design**: normalized 3-table schema with foreign keys and indexes
-- **Security**: Spring Security, BCrypt password hashing, CORS configuration
