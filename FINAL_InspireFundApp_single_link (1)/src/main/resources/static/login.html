@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Sign in — InspireFund</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root{--cream:#F5F0E8;--ink:#1A1208;--ember:#C84B11;--ember2:#E8692E;--sage:#3A5C44;--gold:#D4A843;--muted:#7A6E5F;--card-bg:#FFFDF8;--border:#E2D9C8;--radius:16px;}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);min-height:100vh;display:grid;grid-template-columns:1fr 1fr;}
+
+  .auth-left{background:var(--ink);color:var(--cream);padding:60px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;}
+  .auth-left::before{content:'';position:absolute;top:-100px;right:-100px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(212,168,67,0.15),transparent 70%);}
+  .auth-left::after{content:'';position:absolute;bottom:-80px;left:-60px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(200,75,17,0.12),transparent 70%);}
+  .logo{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;color:var(--cream);text-decoration:none;}
+  .logo span{color:var(--gold);font-style:italic;}
+  .auth-quote{position:relative;z-index:1;}
+  .auth-quote blockquote{font-family:'Playfair Display',serif;font-size:1.9rem;line-height:1.3;margin-bottom:20px;}
+  .auth-quote blockquote em{color:var(--gold);}
+  .auth-quote p{color:rgba(245,240,232,0.55);font-size:0.9rem;line-height:1.7;}
+  .auth-stats{display:flex;gap:32px;position:relative;z-index:1;}
+  .auth-stat h3{font-family:'Playfair Display',serif;font-size:1.8rem;color:var(--gold);}
+  .auth-stat p{font-size:0.75rem;color:rgba(245,240,232,0.45);margin-top:2px;}
+
+  .auth-right{display:flex;align-items:center;justify-content:center;padding:60px;}
+  .auth-form{width:100%;max-width:400px;}
+  .auth-form h1{font-family:'Playfair Display',serif;font-size:2rem;margin-bottom:8px;}
+  .auth-form p.sub{color:var(--muted);font-size:0.9rem;margin-bottom:36px;}
+  .auth-form p.sub a{color:var(--ember);text-decoration:none;}
+
+  .field{margin-bottom:20px;}
+  .field label{display:block;font-size:0.82rem;font-weight:500;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.04em;}
+  .field input{width:100%;padding:13px 16px;border-radius:10px;border:1.5px solid var(--border);font-family:'DM Sans',sans-serif;font-size:0.95rem;background:var(--cream);color:var(--ink);outline:none;transition:border-color 0.2s;}
+  .field input:focus{border-color:var(--ember);}
+  .field input::placeholder{color:rgba(122,110,95,0.6);}
+
+  .forgot{text-align:right;font-size:0.8rem;margin-top:-12px;margin-bottom:24px;}
+  .forgot a{color:var(--ember);text-decoration:none;}
+
+  .btn-full{width:100%;padding:14px;border-radius:10px;border:none;background:var(--ember);color:#fff;font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:500;cursor:pointer;transition:all 0.25s;}
+  .btn-full:hover{background:var(--ember2);transform:translateY(-1px);box-shadow:0 6px 20px rgba(200,75,17,0.3);}
+
+  .divider{display:flex;align-items:center;gap:12px;margin:24px 0;color:var(--muted);font-size:0.82rem;}
+  .divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--border);}
+
+  .error{background:rgba(200,75,17,0.08);border:1px solid rgba(200,75,17,0.3);color:var(--ember);padding:10px 14px;border-radius:8px;font-size:0.85rem;margin-bottom:16px;display:none;}
+  .success{background:rgba(58,92,68,0.1);border:1px solid rgba(58,92,68,0.3);color:var(--sage);padding:10px 14px;border-radius:8px;font-size:0.85rem;margin-bottom:16px;display:none;}
+
+  @media(max-width:768px){body{grid-template-columns:1fr;}.auth-left{display:none;}.auth-right{padding:40px 24px;}}
+</style>
+</head>
+<body>
+<div class="auth-left">
+  <a class="logo" href="index.html">Inspire<span>Fund</span></a>
+  <div class="auth-quote">
+    <blockquote>"Small acts of generosity create <em>ripples</em> that change the world."</blockquote>
+    <p>Join 12,000+ donors who have helped fund life-changing campaigns across India.</p>
+  </div>
+  <div class="auth-stats">
+    <div class="auth-stat"><h3>₹4.2Cr</h3><p>Total raised</p></div>
+    <div class="auth-stat"><h3>847</h3><p>Campaigns funded</p></div>
+    <div class="auth-stat"><h3>12k+</h3><p>Donors</p></div>
+  </div>
+</div>
+
+<div class="auth-right">
+  <div class="auth-form">
+    <h1>Welcome back</h1>
+    <p class="sub">Don't have an account? <a href="register.html">Create one free →</a></p>
+
+    <div class="error" id="errMsg"></div>
+    <div class="success" id="sucMsg"></div>
+
+    <div class="field">
+      <label>Email address</label>
+      <input type="email" id="email" placeholder="you@example.com"/>
+    </div>
+    <div class="field">
+      <label>Password</label>
+      <input type="password" id="password" placeholder="Your password"/>
+    </div>
+    <div class="forgot"><a href="#">Forgot password?</a></div>
+    <button class="btn-full" onclick="login()">Sign in to InspireFund</button>
+    <div class="divider">or continue as</div>
+    <a href="index.html" style="display:block;text-align:center;color:var(--muted);font-size:0.875rem;text-decoration:none">← Browse campaigns without signing in</a>
+  </div>
+</div>
+
+<script>
+async function login() {
+  const email = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value;
+  const err = document.getElementById('errMsg');
+  const suc = document.getElementById('sucMsg');
+  err.style.display = 'none'; suc.style.display = 'none';
+
+  if(!email || !password) { err.textContent='Please fill all fields.'; err.style.display='block'; return; }
+
+  try {
+    const res = await fetch('http://localhost:8080/api/auth/login', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ email, password })
+    });
+    const data = await res.json();
+    if(res.ok) {
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('role', data.role);
+      localStorage.setItem('name', data.name);
+      suc.textContent = 'Login successful! Redirecting...';
+      suc.style.display = 'block';
+      setTimeout(()=>{ window.location.href = data.role==='ADMIN' ? 'admin.html' : 'index.html'; }, 1000);
+    } else {
+      err.textContent = data.message || 'Invalid credentials.';
+      err.style.display = 'block';
+    }
+  } catch(e) {
+    err.textContent = 'Cannot connect to server. Make sure Spring Boot is running on port 8080.';
+    err.style.display = 'block';
+  }
+}
+document.addEventListener('keydown', e=>{ if(e.key==='Enter') login(); });
+</script>
+</body>
+</html>

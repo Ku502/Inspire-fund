@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Create account — InspireFund</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root{--cream:#F5F0E8;--ink:#1A1208;--ember:#C84B11;--ember2:#E8692E;--sage:#3A5C44;--gold:#D4A843;--muted:#7A6E5F;--card-bg:#FFFDF8;--border:#E2D9C8;--radius:16px;}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);min-height:100vh;display:grid;grid-template-columns:1fr 1fr;}
+  .auth-left{background:var(--ink);color:var(--cream);padding:60px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;}
+  .auth-left::before{content:'';position:absolute;top:-80px;right:-80px;width:360px;height:360px;border-radius:50%;background:radial-gradient(circle,rgba(58,92,68,0.2),transparent 70%);}
+  .logo{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;color:var(--cream);text-decoration:none;}
+  .logo span{color:var(--gold);font-style:italic;}
+  .steps{position:relative;z-index:1;}
+  .step{display:flex;gap:16px;margin-bottom:28px;}
+  .step-num{width:32px;height:32px;border-radius:50%;background:var(--ember);color:#fff;display:flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:700;flex-shrink:0;}
+  .step-info h4{font-size:0.95rem;margin-bottom:4px;}
+  .step-info p{font-size:0.8rem;color:rgba(245,240,232,0.5);}
+  .left-footer{color:rgba(245,240,232,0.35);font-size:0.78rem;line-height:1.6;}
+
+  .auth-right{display:flex;align-items:center;justify-content:center;padding:60px;}
+  .auth-form{width:100%;max-width:420px;}
+  .auth-form h1{font-family:'Playfair Display',serif;font-size:2rem;margin-bottom:8px;}
+  .auth-form p.sub{color:var(--muted);font-size:0.9rem;margin-bottom:36px;}
+  .auth-form p.sub a{color:var(--ember);text-decoration:none;}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .field{margin-bottom:18px;}
+  .field label{display:block;font-size:0.8rem;font-weight:500;color:var(--muted);margin-bottom:7px;text-transform:uppercase;letter-spacing:0.04em;}
+  .field input,.field select{width:100%;padding:12px 14px;border-radius:10px;border:1.5px solid var(--border);font-family:'DM Sans',sans-serif;font-size:0.95rem;background:var(--cream);color:var(--ink);outline:none;transition:border-color 0.2s;}
+  .field input:focus,.field select:focus{border-color:var(--ember);}
+  .terms{font-size:0.8rem;color:var(--muted);margin-bottom:20px;line-height:1.6;}
+  .terms a{color:var(--ember);}
+  .btn-full{width:100%;padding:14px;border-radius:10px;border:none;background:var(--ember);color:#fff;font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:500;cursor:pointer;transition:all 0.25s;}
+  .btn-full:hover{background:var(--ember2);transform:translateY(-1px);box-shadow:0 6px 20px rgba(200,75,17,0.3);}
+  .error{background:rgba(200,75,17,0.08);border:1px solid rgba(200,75,17,0.3);color:var(--ember);padding:10px 14px;border-radius:8px;font-size:0.85rem;margin-bottom:16px;display:none;}
+  .success{background:rgba(58,92,68,0.1);border:1px solid rgba(58,92,68,0.3);color:var(--sage);padding:10px 14px;border-radius:8px;font-size:0.85rem;margin-bottom:16px;display:none;}
+  @media(max-width:768px){body{grid-template-columns:1fr;}.auth-left{display:none;}.auth-right{padding:40px 24px;}.row{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="auth-left">
+  <a class="logo" href="index.html">Inspire<span>Fund</span></a>
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><div class="step-info"><h4>Create your account</h4><p>Takes less than 2 minutes</p></div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-info"><h4>Browse campaigns</h4><p>Filter by cause, location, urgency</p></div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-info"><h4>Donate securely</h4><p>Razorpay-powered · 100% safe</p></div></div>
+    <div class="step"><div class="step-num">4</div><div class="step-info"><h4>Track your impact</h4><p>Get updates from campaign organizers</p></div></div>
+  </div>
+  <div class="left-footer">By creating an account you agree to our Terms of Service and Privacy Policy. InspireFund does not sell your data.</div>
+</div>
+
+<div class="auth-right">
+  <div class="auth-form">
+    <h1>Create your account</h1>
+    <p class="sub">Already have one? <a href="login.html">Sign in →</a></p>
+
+    <div class="error" id="errMsg"></div>
+    <div class="success" id="sucMsg"></div>
+
+    <div class="row">
+      <div class="field"><label>First name</label><input type="text" id="fname" placeholder="Priya"/></div>
+      <div class="field"><label>Last name</label><input type="text" id="lname" placeholder="Sharma"/></div>
+    </div>
+    <div class="field"><label>Email address</label><input type="email" id="email" placeholder="priya@example.com"/></div>
+    <div class="field"><label>Phone (optional)</label><input type="tel" id="phone" placeholder="+91 98765 43210"/></div>
+    <div class="field"><label>Password</label><input type="password" id="password" placeholder="Min. 8 characters"/></div>
+    <div class="field"><label>Confirm password</label><input type="password" id="confirm" placeholder="Repeat password"/></div>
+
+    <p class="terms">By creating an account, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.</p>
+    <button class="btn-full" onclick="register()">Create my InspireFund account</button>
+  </div>
+</div>
+
+<script>
+async function register() {
+  const fname = document.getElementById('fname').value.trim();
+  const lname = document.getElementById('lname').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const phone = document.getElementById('phone').value.trim();
+  const password = document.getElementById('password').value;
+  const confirm = document.getElementById('confirm').value;
+  const err = document.getElementById('errMsg');
+  const suc = document.getElementById('sucMsg');
+  err.style.display='none'; suc.style.display='none';
+
+  if(!fname||!lname||!email||!password){err.textContent='Please fill all required fields.';err.style.display='block';return;}
+  if(password.length<8){err.textContent='Password must be at least 8 characters.';err.style.display='block';return;}
+  if(password!==confirm){err.textContent='Passwords do not match.';err.style.display='block';return;}
+
+  try {
+    const res = await fetch('http://localhost:8080/api/auth/register', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ name: fname+' '+lname, email, phone, password, role:'DONOR' })
+    });
+    const data = await res.json();
+    if(res.ok) {
+      suc.textContent='Account created! Redirecting to login...';
+      suc.style.display='block';
+      setTimeout(()=>window.location.href='login.html', 1500);
+    } else {
+      err.textContent = data.message || 'Registration failed.';
+      err.style.display='block';
+    }
+  } catch(e) {
+    err.textContent='Cannot connect to server. Make sure Spring Boot is running on port 8080.';
+    err.style.display='block';
+  }
+}
+</script>
+</body>
+</html>
