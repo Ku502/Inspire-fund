@@ -6,8 +6,8 @@
 ## Project Structure
 
 ```
-InspireFund/
-├── frontend/
+InspireFund
+├── frontend
 │   ├── index.html        ← Home page with campaign cards
 │   ├── campaign.html     ← Campaign detail + donate
 │   ├── login.html        ← Sign in
