@@ -5,7 +5,7 @@
 
 ## Project Structure
 
-```
+
 InspireFund
 ├── frontend
 │   ├── index.html        ← Home page with campaign cards
