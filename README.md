@@ -1,5 +1,5 @@
 # InspireFund 
-### A modern charity crowdfunding platform — built with HTML/CSS/JS + Spring Boot + MySQL
+### A modern charity crowdfunding platform — built with HTML/CSS/JS + java Spring Boot + MySQL
 
 
 
